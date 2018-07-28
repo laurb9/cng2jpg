@@ -15,7 +15,7 @@ def convert_one(src_filename, dst_filename):
     :param dst_filename: destination file, will be truncated if exists
     """
     print dst_filename
-    with open(src_filename, 'r') as in_stream, open(dst_filename, 'w') as out_stream:
+    with open(src_filename, 'rb') as in_stream, open(dst_filename, 'wb') as out_stream:
         out_stream.write(bytearray((ord(c) ^ 239) for c in in_stream.read()))
 
 
@@ -34,7 +34,7 @@ def convert_all(src_path, dst_path, remove=False):
         target_path = root.replace(src_path, dst_path, 1)
         for filename in files:
             basename, ext = os.path.splitext(filename)
-            if ext == '.cng':
+            if ext.lower() == '.cng':
                 if not os.path.exists(target_path):
                     os.makedirs(target_path)
                 dst_filename = os.path.join(target_path, basename + ".jpg")
