@@ -14,9 +14,9 @@ def convert_one(src_filename, dst_filename):
     :param src_filename: source filename, will be opened read-only
     :param dst_filename: destination file, will be truncated if exists
     """
-    print dst_filename
+    print (dst_filename)
     with open(src_filename, 'rb') as in_stream, open(dst_filename, 'wb') as out_stream:
-        out_stream.write(bytearray((ord(c) ^ 239) for c in in_stream.read()))
+        out_stream.write(bytearray((c ^ 239) for c in in_stream.read()))
 
 
 def convert_all(src_path, dst_path, remove=False):
